@@ -1,0 +1,25 @@
+{
+  "name": "tamilrockers-search",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "tamilrockers-search": "index.js"
+  },
+  "repository": {
+    "url": "https://github.com/abinj30/tamilrockers-search"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["tamilrockers", "movie", "search"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "commander": "^5.0.0",
+    "fuse.js": "^5.1.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.4"
+  }
+}

@@ -1,0 +1,5 @@
+/node_modules
+/.vscode
+/downloads
+links.txt
+out*.txt
