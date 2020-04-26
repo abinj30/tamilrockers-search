@@ -14,7 +14,7 @@
   },
   "keywords": ["tamilrockers", "movie", "search"],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "commander": "^5.0.0",
