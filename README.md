@@ -27,3 +27,4 @@ Supported Languages:
  - Hindi
  - Malayalam
  - Kannada
+ - English
