@@ -15,18 +15,36 @@ async function incrCounts(incr) {
 }
 
 function getTitles($) {
-   const titlesRows = Array.from($(".topic_title"));
-   
-   return titlesRows.map(ele => {
-      const link = ele.attribs["href"];
-      const titleSpan = $(ele).find("span");
-      if(titleSpan.length > 0){
-         const title = titleSpan[0].firstChild.nodeValue;
-         return {link, title};
-      } else {
-         return {link: null, title: null};
-      }
-   });
+   let titlesRows = [];
+
+   titlesRows = Array.from($(".topic_title"));
+   if(titlesRows.length > 0) {
+      return titlesRows.map(ele => {
+         const link = ele.attribs["href"];
+         const titleSpan = $(ele).find("span");
+         if(titleSpan.length > 0){
+            const title = titleSpan[0].firstChild.nodeValue;
+            return {link, title};
+         } else {
+            return {link: null, title: null};
+         }
+      });
+   }
+   //fallback for english movie forumns
+   titlesRows = Array.from($(".article_title"));
+   if(titlesRows.length > 0) {
+      return titlesRows.map(ele => {
+         const link = ele.attribs["href"];
+         if(ele.childNodes.length > 0){
+            const title = ele.firstChild.data;
+            return {link, title};
+         } else {
+            return {link: null, title: null};
+         }
+      });
+   }
+
+   return [];
 }
 
 

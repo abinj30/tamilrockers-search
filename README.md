@@ -29,3 +29,4 @@ Supported Languages Options:
  - hindi
  - malayalam
  - kannada
+ - english

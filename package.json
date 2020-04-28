@@ -1,6 +1,6 @@
 {
   "name": "tamilrockers-search",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -12,9 +12,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["tamilrockers", "movie", "search"],
+  "keywords": [
+    "tamilrockers",
+    "movie",
+    "search"
+  ],
   "author": "",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "commander": "^5.0.0",
