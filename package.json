@@ -1,6 +1,6 @@
 {
   "name": "tamilrockers-search",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -12,7 +12,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["tamilrockers", "movie", "search"],
+  "keywords": [
+    "tamilrockers",
+    "movie",
+    "search"
+  ],
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
