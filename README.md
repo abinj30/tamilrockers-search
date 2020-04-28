@@ -10,6 +10,7 @@ CLI application to search tamilrockers.com.
 ## Usage Instructions
 
     npm install tamilrockers-search -g
+    tamilrockers-search -l all -s "petta-2019" -o out.txt
     tamilrockers-search -l tamil -s "petta-2019" -o out.txt
     tamilrockers-search -l tamil -s "vinnaithaandi varuvaayaa" -o out.txt
     tamilrockers-search -l kannada -s "pailwan-2019" -o out.txt
@@ -17,13 +18,14 @@ CLI application to search tamilrockers.com.
     tamilrockers-search -l hindi -s "dangal-2016" -o out.txt
 
 Supported options:
- -  Language: -l, --language
+ - Language: -l, --language
  - Movie Name: -s, --searchString
  - Output filename: -o, --output
  
-Supported Languages:
- - Tamil
- - Telugu
- - Hindi
- - Malayalam
- - Kannada
+Supported Languages Options:
+ - all (Search in all forums)
+ - tamil
+ - telugu
+ - hindi
+ - malayalam
+ - kannada
