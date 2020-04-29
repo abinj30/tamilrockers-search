@@ -85,17 +85,18 @@ async function getPage(url) {
 async function searchForum(url, searchString) {
 
    const matchedTitles = new Array();
-   var nextPage = url;
+   let nextPage = url;
 
    while(nextPage != null) {
       try {
-         var {$, nextPage} = await getPage(nextPage);
+         const res = await getPage(nextPage);
+         nextPage = res.nextPage;
+         const matches = getMatches(res.$, searchString);
+         incrCounts(matches.length);
+         matchedTitles.push(...matches);
       } catch (error) {
          continue;
       }
-      const matches = getMatches($, searchString);
-      incrCounts(matches.length);
-      matchedTitles.push(...matches);
    }
 
    return matchedTitles;
