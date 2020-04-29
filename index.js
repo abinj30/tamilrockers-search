@@ -4,7 +4,9 @@ const cheerio = require("cheerio");
 const Fuse = require("fuse.js");
 const fs = require("fs");
 const url = require("./url.json");
-const { program } = require('commander');
+const { program } = require("commander");
+
+class RequestError extends RequestError {}
 
 let matchCount = 0;
 let pageCount = 0;
@@ -19,7 +21,7 @@ function getTitles($) {
 
    titlesRows = Array.from($(".topic_title"));
    if(titlesRows.length > 0) {
-      return titlesRows.map(ele => {
+      return titlesRows.map((ele) => {
          const link = ele.attribs["href"];
          const titleSpan = $(ele).find("span");
          if(titleSpan.length > 0){
@@ -33,7 +35,7 @@ function getTitles($) {
    //fallback for english movie forumns
    titlesRows = Array.from($(".article_title"));
    if(titlesRows.length > 0) {
-      return titlesRows.map(ele => {
+      return titlesRows.map((ele) => {
          const link = ele.attribs["href"];
          if(ele.childNodes.length > 0){
             const title = ele.firstChild.data;
@@ -63,9 +65,10 @@ async function getPage(url) {
 
    const nextNewSelector = ".topic_controls .next a";
    const nextOldSelector = ".next";
+   let htmlBody = null;
 
    try {
-      var htmlBody = await request(url);
+      htmlBody = await request(url);
    } catch (error) {
       throw new RequestError(error);
    }
@@ -87,7 +90,7 @@ async function searchForum(url, searchString) {
    const matchedTitles = new Array();
    let nextPage = url;
 
-   while(nextPage != null) {
+   while(nextPage !== null) {
       try {
          const res = await getPage(nextPage);
          nextPage = res.nextPage;
@@ -107,11 +110,11 @@ async function main(args){
    const {language, searchString, output} = args;
    //language validation
    let forumUrls;
-   if (language.toLowerCase() == "all") {
-      forumUrls = Object.keys(url).map(lang => url[lang]).reduce((cur, next) => cur.concat(next));
+   if (language.toLowerCase() === "all") {
+      forumUrls = Object.keys(url).map((lang) => url[lang]).reduce((cur, next) => cur.concat(next));
    } else {
       forumUrls = url[language.toLowerCase()];
-      if(forumUrls === undefined) {
+      if(!forumUrls) {
          console.log("Input Language not supported. Exiting...");
          process.exit(1);
       }
@@ -125,22 +128,22 @@ async function main(args){
       process.exit(1);
    }
 
-   const functions = forumUrls.map(url => searchForum(url, searchString));
-   Promise.all(functions).then(results => {
+   const functions = forumUrls.map((url) => searchForum(url, searchString));
+   Promise.all(functions).then((results) => {
       const matchedTitles = results.reduce((cur, next) => cur.concat(next));
-      if (matchedTitles.length == 0){
+      if (matchedTitles.length === 0){
          console.log("\nNo matches found."); return;
       }
-      const fileOutputs = matchedTitles.map(ele => ele.link).join("\n");
+      const fileOutputs = matchedTitles.map((ele) => ele.link).join("\n");
       fs.writeFileSync(output, fileOutputs);
       console.log(`\nResults stored to ${output}`);
    });
 }
 
 program
-   .requiredOption('-l, --language <type>', 'Movie Language')
-   .requiredOption('-s, --searchString <type>', 'Search String/Movie Name')
-   .requiredOption('-o, --output <type>', "Output File Name")
+   .requiredOption("-l, --language <type>", 'Movie Language')
+   .requiredOption("-s, --searchString <type>", 'Search String/Movie Name')
+   .requiredOption("-o, --output <type>", "Output File Name");
 program.parse(process.argv);
 
 main(program);
