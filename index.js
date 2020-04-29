@@ -56,7 +56,7 @@ function getMatches($, searchString) {
 
    if (titles.length > 0) {
       const fuse = new Fuse(titles, {keys: ["title"], threshold: 0.3});
-      matches = fuse.search(searchString).map(ele => ele.item);
+      matches = fuse.search(searchString).map((ele) => ele.item);
    }
    return matches;
 }
@@ -141,8 +141,8 @@ async function main(args){
 }
 
 program
-   .requiredOption("-l, --language <type>", 'Movie Language')
-   .requiredOption("-s, --searchString <type>", 'Search String/Movie Name')
+   .requiredOption("-l, --language <type>", "Movie Language")
+   .requiredOption("-s, --searchString <type>", "Search String/Movie Name")
    .requiredOption("-o, --output <type>", "Output File Name");
 program.parse(process.argv);
 
