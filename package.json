@@ -20,10 +20,9 @@
   "author": "",
   "license": "GPL-3.0",
   "dependencies": {
+    "bent": "^7.3.0",
     "cheerio": "^1.0.0-rc.3",
     "commander": "^5.0.0",
-    "fuse.js": "^5.1.0",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.4"
+    "fuse.js": "^5.1.0"
   }
 }

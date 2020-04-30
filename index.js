@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-const request = require("request-promise");
+const bent = require("bent");
+const getBody = bent("string");
 const cheerio = require("cheerio");
 const Fuse = require("fuse.js");
 const fs = require("fs");
@@ -68,7 +69,7 @@ async function getPage(url) {
    let htmlBody = null;
 
    try {
-      htmlBody = await request(url);
+      htmlBody = await getBody(url);
    } catch (error) {
       throw new RequestError(error);
    }
