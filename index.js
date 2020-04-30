@@ -6,7 +6,7 @@ const fs = require("fs");
 const url = require("./url.json");
 const { program } = require("commander");
 
-class RequestError extends RequestError {}
+class RequestError extends Error {}
 
 let matchCount = 0;
 let pageCount = 0;
