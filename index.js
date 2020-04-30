@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-const request = require("request-promise");
+const bent = require("bent");
+const getBody = bent("string");
 const cheerio = require("cheerio");
 const Fuse = require("fuse.js");
 const fs = require("fs");
 const url = require("./url.json");
 const { program } = require("commander");
 
-class RequestError extends RequestError {}
+class RequestError extends Error {}
 
 let matchCount = 0;
 let pageCount = 0;
@@ -56,7 +57,7 @@ function getMatches($, searchString) {
 
    if (titles.length > 0) {
       const fuse = new Fuse(titles, {keys: ["title"], threshold: 0.3});
-      matches = fuse.search(searchString).map(ele => ele.item);
+      matches = fuse.search(searchString).map((ele) => ele.item);
    }
    return matches;
 }
@@ -68,7 +69,7 @@ async function getPage(url) {
    let htmlBody = null;
 
    try {
-      htmlBody = await request(url);
+      htmlBody = await getBody(url);
    } catch (error) {
       throw new RequestError(error);
    }
@@ -141,8 +142,8 @@ async function main(args){
 }
 
 program
-   .requiredOption("-l, --language <type>", 'Movie Language')
-   .requiredOption("-s, --searchString <type>", 'Search String/Movie Name')
+   .requiredOption("-l, --language <type>", "Movie Language")
+   .requiredOption("-s, --searchString <type>", "Search String/Movie Name")
    .requiredOption("-o, --output <type>", "Output File Name");
 program.parse(process.argv);
 
