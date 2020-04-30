@@ -46,7 +46,6 @@ function getTitles($) {
          }
       });
    }
-
    return [];
 }
 
@@ -82,7 +81,6 @@ async function getPage(url) {
    else if($(nextOldSelector).length > 0) {
       nextPage = $(nextOldSelector)[0].attribs["href"];
    }
-
    return {$, nextPage};
 }
 
@@ -90,7 +88,7 @@ async function searchForum(url, searchString) {
 
    const matchedTitles = new Array();
    let nextPage = url;
-
+   //repeatedly scrape each page and find the matches
    while(nextPage !== null) {
       try {
          const res = await getPage(nextPage);
@@ -102,7 +100,6 @@ async function searchForum(url, searchString) {
          continue;
       }
    }
-
    return matchedTitles;
 }
 
@@ -120,7 +117,6 @@ async function main(args){
          process.exit(1);
       }
    }
-   
    //checking connection
    try {
       await getPage(forumUrls[0]);
@@ -128,7 +124,7 @@ async function main(args){
       console.log("Connection Failed. TamilRockers might be blocked in your region!");
       process.exit(1);
    }
-
+   //create all the async functions and store the results
    const functions = forumUrls.map((url) => searchForum(url, searchString));
    Promise.all(functions).then((results) => {
       const matchedTitles = results.reduce((cur, next) => cur.concat(next));
