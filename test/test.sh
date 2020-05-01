@@ -6,11 +6,19 @@ fail () {
    exit 1
 }
 
+HINDI=("karwaan-2018" "hindi" 4 "https://tamilrockers.ws/index.php/topic/80873-karwaan-2018hindi-hq-hdrip-x264-250mb-esubs/")
 MALAYALAM=("virus-2019" "malayalam" 25 "https://tamilrockers.ws/index.php/topic/113733-virus-2019-malayalam-720p-hdrip-dd-51-x264-14gb-esubs/")
 TAMIL=("petta-2019" "tamil" 15 "https://tamilrockers.ws/index.php/topic/104722-petta-2019tamil-1080p-proper-hd-avc-dd-51-x264-25gb-esubs/")
+KANNADA=("pailwaan-2019" "kannada" 5 "https://tamilrockers.ws/index.php/topic/121467-pailwaan-2019proper-kannada-720p-hdrip-x264-dd-51-14gb-esubs/")
+TELUGU=("ala-vaikunthapurramloo-2020" "telugu" 20 "https://tamilrockers.ws/index.php/topic/128870-ala-vaikunthapurramloo-2020-telugu-720p-hdrip-ac3-51-x264-14gb-esubs/")
+ENGLISH=("bloodshot-2020" "english" 7 "https://tamilrockers.ws/index.php/tutorials/article/20357-bloodshot-2020-english-720p-bdrip-x264-1gb-esubs/")
 TEST_SUITES=(
+  HINDI[@]
   MALAYALAM[@]
   TAMIL[@]
+  KANNADA[@]
+  TELUGU[@]
+  ENGLISH[@]
 )
 
 # Loop and print it.  Using offset and length to extract values
@@ -44,5 +52,3 @@ do
    echo "Test $LANGUAGE passed✅"
 
 done
-
-
