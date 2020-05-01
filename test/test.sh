@@ -1,7 +1,7 @@
 #!/bin/bash
 
 fail () {
-   echo $1
+   echo "$1"
    echo "Test $2 failed❌"
    exit 1
 }
@@ -31,22 +31,22 @@ do
    SAMPLE_MATCH=${!TEST_SUITES[i]:3:1}
    OUTPUT_FILE="out_$LANGUAGE.txt"
 
-   tamilrockers-search -s $SEARCH_STRING -l $LANGUAGE -o $OUTPUT_FILE
-   ACTUAL_COUNT=$(wc -l $OUTPUT_FILE | awk '{ print $1 }')
+   tamilrockers-search -s "$SEARCH_STRING" -l "$LANGUAGE" -o "$OUTPUT_FILE"
+   ACTUAL_COUNT=$(wc -l "$OUTPUT_FILE" | awk '{ print $1 }')
 
+   echo "Expected Count >= $EXPECTED_COUNT. Actual Count: $ACTUAL_COUNT"
    if [[ $ACTUAL_COUNT -lt $EXPECTED_COUNT ]]; then
-      echo "Expected Count: $EXPECTED_COUNT. Actual Count: $ACTUAL_COUNT"
       fail "Count Validation Failed❌" $LANGUAGE
    else
       echo "Count Validation passed✅"
    fi
 
    echo "Matching Sample: $SAMPLE_MATCH"
-   if grep -Fxq "$SAMPLE_MATCH" $OUTPUT_FILE
+   if grep -Fxq "$SAMPLE_MATCH" "$OUTPUT_FILE"
    then
       echo "Sample Matching Passed✅"
    else
-      echo fail "Sample Matching Failed❌" $LANGUAGE
+      fail "Sample Matching Failed❌" "$LANGUAGE"
    fi
 
    echo "Test $LANGUAGE passed✅"
